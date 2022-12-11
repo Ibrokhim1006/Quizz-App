@@ -1,0 +1,82 @@
+{% extends  'quizz_app/base.html' %}
+{% load static %}
+{% block title %} <title>Тест {{section_test.title}}</title> {% endblock %}
+
+{% block content %}
+
+<h1>Тест {{section_test.title}}</h1>
+
+<div class="row">
+    {% for item in object_list %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="col-md-6 mt-2">
+
+                <div >
+                    <h2 class="mb-3">Вопрос:
+                        {{item.question}}
+                    </h2>
+                    
+                    <div class="form-check mb-3">
+                        <input class="form-check-input option_one" type="radio" name="answ"
+                            id="{{item.option_one}}">
+                        <label class="form-check-label" for="{{item.option_one}}">
+                           A. {{item.option_one}}
+                        </label>
+                    </div>
+        
+                    <div class="form-check mb-3">
+                        <input class="form-check-input option_two" type="radio" name="answ"
+                            id="{{item.option_two}}">
+                        <label class="form-check-label" for="{{item.option_two}}">
+                           B. {{item.option_two}}
+                        </label>
+                    </div>
+        
+                    <div class="form-check mb-3">
+                        <input class="form-check-input option_three" type="radio" name="answ"
+                            id="{{item.option_three}}">
+                        <label class="form-check-label" for="{{item.option_three}}">
+                           C. {{item.option_three}}
+                        </label>
+                    </div>
+        
+                    <div class="form-check mb-3">
+                        <input class="form-check-input option_four" type="radio" name="answ"
+                            id="{{item.option_four}}">
+                        <label class="form-check-label" for="{{item.option_four}}">
+                           D. {{item.option_four}}
+                        </label>
+                    </div>
+        
+                </div>
+            </div>
+
+
+        </form>
+    {% endfor %}
+</div>
+
+<div>
+    <span>
+      {% if object_list.has_previous %}
+        <a href="?page={{ object_list.previous_page_number }}">Previous</a>
+      {% endif %}
+      <span>
+        Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+      </span>
+      {% if object_list.has_next %}
+        <a href="?page={{ object_list.next_page_number }}" id="nxt">Next</a>
+      {% endif %}
+    </span>
+  </div>
+
+  <script>
+    btnNext = document.getElementById('nxt')
+    optionOne = document.getElementsByClassName('option_one')
+    optionTwo = document.getElementsByClassName('option_two')
+    optionThree = document.getElementById('option_three')
+    optionFour = document.getElementById('option_four')
+
+  </script>
+{% endblock %}

@@ -1,0 +1,5 @@
+env\Scripts\activate && py manage.py runserver --settings=core.settings_product
+py manage.py runserver --settings=core.settings_product
+py manage.py runserver --settings=core.settings_local
+py manage.py migrate --settings=core.settings_product
+py manage.py makemigrations --settings=core.settings_product
